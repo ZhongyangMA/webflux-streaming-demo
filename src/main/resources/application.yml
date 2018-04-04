@@ -1,0 +1,20 @@
+spring:
+  profiles:
+    active: production
+  application:
+    name: c1-clue-score
+  jackson:
+    date-format: yyyy-MM-dd HH:mm:ss
+    timeZone: GMT+8
+    deserialization:
+      fail-on-unknown-properties: true
+  aop:
+    auto: true
+  resources:
+    chain:
+      strategy:
+        content:
+          enabled: true
+          paths: /**
+logging:
+  config: classpath:log4j2.yml
