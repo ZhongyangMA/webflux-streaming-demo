@@ -18,7 +18,7 @@ import java.util.Date;
  * Time: 12:07
  */
 @RestController
-@RequestMapping("/reactive")
+@RequestMapping("/annotated")
 public class ReactiveController {
 
     // Example of returning a simple string to your browser

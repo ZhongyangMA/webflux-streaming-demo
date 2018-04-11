@@ -16,10 +16,16 @@ import reactor.core.publisher.Mono;
 @Component
 public class ExampleHandler {
 
-    public Mono<ServerResponse> test3(ServerRequest request) {
+    public Mono<ServerResponse> funcTest1(ServerRequest request) {
         return ServerResponse.ok()
                 .contentType(MediaType.TEXT_PLAIN)
-                .body(BodyInserters.fromObject("test3: WebFlux functional router."));
+                .body(BodyInserters.fromObject("funcTest1: WebFlux functional router."));
+    }
+
+    public Mono<ServerResponse> funcTest2(ServerRequest request) {
+        return ServerResponse.ok()
+                .contentType(MediaType.TEXT_PLAIN)
+                .body(BodyInserters.fromObject("funcTest2: WebFlux functional router."));
     }
 
 }
