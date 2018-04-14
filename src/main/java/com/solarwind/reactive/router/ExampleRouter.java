@@ -39,6 +39,12 @@ public class ExampleRouter {
                 .and(RequestPredicates.accept(MediaType.APPLICATION_JSON)), exampleHandler::findAll);
     }
 
+    @Bean
+    public RouterFunction<ServerResponse> findByGender(ExampleHandler exampleHandler) {
+        return RouterFunctions.route(RequestPredicates
+                .GET("/functional/user/{gender}")
+                .and(RequestPredicates.accept(MediaType.APPLICATION_JSON)), exampleHandler::findByGender);
+    }
 
 
 }

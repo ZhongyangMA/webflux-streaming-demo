@@ -76,4 +76,10 @@ public class ExampleHandler {
                 .body(userRepository.findAll(), User.class);
     }
 
+    public Mono<ServerResponse> findByGender(ServerRequest request) {
+        return ServerResponse.ok()
+                .contentType(MediaType.APPLICATION_JSON)
+                .body(userRepository.findByGender(request.pathVariable("gender")), User.class);
+    }
+
 }
