@@ -27,6 +27,9 @@ public class ExampleHandler {
     @Autowired
     private UserRepository userRepository;
 
+    /**
+     * for annotated controllers
+     */
     public Mono<String> test1() {
         return Mono.just("test1: return a simple string");
     }
@@ -41,6 +44,16 @@ public class ExampleHandler {
         return flux;
     }
 
+    public Flux<User> findAll() {
+        return userRepository.findAll();
+    }
+
+
+
+
+    /**
+     * below for functional routers
+     */
     public Mono<ServerResponse> funcTest1(ServerRequest request) {
         return ServerResponse.ok()
                 .contentType(MediaType.TEXT_PLAIN)
