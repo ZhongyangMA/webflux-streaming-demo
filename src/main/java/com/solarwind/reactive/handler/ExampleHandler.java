@@ -1,6 +1,9 @@
 package com.solarwind.reactive.handler;
 
+import com.solarwind.reactive.dao.UserRepository;
+import com.solarwind.reactive.model.User;
 import javafx.util.Pair;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
 import org.springframework.stereotype.Component;
 import org.springframework.web.reactive.function.BodyInserters;
@@ -20,6 +23,9 @@ import java.util.Date;
  */
 @Component
 public class ExampleHandler {
+
+    @Autowired
+    private UserRepository userRepository;
 
     public Mono<String> test1() {
         return Mono.just("test1: return a simple string");
@@ -45,6 +51,12 @@ public class ExampleHandler {
         return ServerResponse.ok()
                 .contentType(MediaType.TEXT_PLAIN)
                 .body(BodyInserters.fromObject("funcTest2: WebFlux functional router."));
+    }
+
+    public Mono<ServerResponse> findAll(ServerRequest request) {
+        return ServerResponse.ok()
+                .contentType(MediaType.APPLICATION_JSON)
+                .body(userRepository.findAll(), User.class);
     }
 
 }

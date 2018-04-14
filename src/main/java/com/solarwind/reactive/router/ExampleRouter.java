@@ -32,4 +32,13 @@ public class ExampleRouter {
                 .and(RequestPredicates.accept(MediaType.TEXT_PLAIN)), exampleHandler::funcTest2);
     }
 
+    @Bean
+    public RouterFunction<ServerResponse> listAll(ExampleHandler exampleHandler) {
+        return RouterFunctions.route(RequestPredicates
+                .GET("/functional/user/list")
+                .and(RequestPredicates.accept(MediaType.APPLICATION_JSON)), exampleHandler::findAll);
+    }
+
+
+
 }
