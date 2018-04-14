@@ -1,6 +1,9 @@
 package com.solarwind.reactive.handler;
 
+import com.solarwind.reactive.dao.UserRepository;
+import com.solarwind.reactive.model.User;
 import javafx.util.Pair;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
 import org.springframework.stereotype.Component;
 import org.springframework.web.reactive.function.BodyInserters;
@@ -21,6 +24,12 @@ import java.util.Date;
 @Component
 public class ExampleHandler {
 
+    @Autowired
+    private UserRepository userRepository;
+
+    /**
+     * for annotated controllers
+     */
     public Mono<String> test1() {
         return Mono.just("test1: return a simple string");
     }
@@ -35,6 +44,20 @@ public class ExampleHandler {
         return flux;
     }
 
+    public Flux<User> findAll() {
+        return userRepository.findAll();
+    }
+
+    public Flux<User> findByGender(String gender) {
+        return userRepository.findByGender(gender);
+    }
+
+
+
+
+    /**
+     * below for functional routers
+     */
     public Mono<ServerResponse> funcTest1(ServerRequest request) {
         return ServerResponse.ok()
                 .contentType(MediaType.TEXT_PLAIN)
@@ -45,6 +68,18 @@ public class ExampleHandler {
         return ServerResponse.ok()
                 .contentType(MediaType.TEXT_PLAIN)
                 .body(BodyInserters.fromObject("funcTest2: WebFlux functional router."));
+    }
+
+    public Mono<ServerResponse> findAll(ServerRequest request) {
+        return ServerResponse.ok()
+                .contentType(MediaType.APPLICATION_JSON)
+                .body(userRepository.findAll(), User.class);
+    }
+
+    public Mono<ServerResponse> findByGender(ServerRequest request) {
+        return ServerResponse.ok()
+                .contentType(MediaType.APPLICATION_JSON)
+                .body(userRepository.findByGender(request.pathVariable("gender")), User.class);
     }
 
 }
