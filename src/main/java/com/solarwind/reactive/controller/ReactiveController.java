@@ -6,6 +6,7 @@ import javafx.util.Pair;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 import reactor.core.publisher.Flux;
@@ -39,6 +40,12 @@ public class ReactiveController {
     @GetMapping(value = "/user/list", produces = "application/json")
     public Flux<User> listAll() {
         return exampleHandler.findAll();
+    }
+
+    // Find items by gender from user collection in reactive mongoDB
+    @GetMapping(value = "/user/{gender}")
+    public Flux<User> findByGender(@PathVariable("gender") String gender) {
+        return exampleHandler.findByGender(gender);
     }
 
 }

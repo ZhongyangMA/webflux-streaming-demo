@@ -48,6 +48,10 @@ public class ExampleHandler {
         return userRepository.findAll();
     }
 
+    public Flux<User> findByGender(String gender) {
+        return userRepository.findByGender(gender);
+    }
+
 
 
 
