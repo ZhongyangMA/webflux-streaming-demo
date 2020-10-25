@@ -21,6 +21,7 @@ import reactor.core.publisher.Mono;
 @RestController
 @RequestMapping("/annotated")
 public class ReactiveController {
+
     @Autowired
     private ExampleHandler exampleHandler;
 
